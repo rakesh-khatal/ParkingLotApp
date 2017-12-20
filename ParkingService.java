@@ -18,6 +18,22 @@ public interface ParkingService {
 	 * @param size
 	 */
 	public void createParkingLot(final int size);
-	public int parkVehicle(String registrationNumber, String color);
+	/**
+	 * This method is use to park the vehicle
+	 * @param registrationNumber
+	 * @param color
+	 */
+	public int parkVehicle(final String registrationNumber, final String color);
+	
+	/**
+	 * This method is use to get the all park vehicles available in parking lot
+	 * @param slotId
+	 */
 	public List<Ticket> getParkedVehicleDetails();
+	
+	/**
+	 * This method is use to empty parking slot
+	 * @param slotId
+	 */
+	public int leaveVehicle(final int slotId);
 }

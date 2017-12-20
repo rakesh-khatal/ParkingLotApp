@@ -61,6 +61,20 @@ public class MyApp {
 			 }
 
 			break;
+			
+		case "leave":
+			
+			int leavedSlotId = parkingService.leaveVehicle(Integer.parseInt(array[1]));
+			if(leavedSlotId != 0)
+				System.out.println("Slot number " + leavedSlotId + " is free");
+			else
+				System.out.println("Please enter valid input");
+
+			break;
+			
+		default:
+			System.out.println("Please enter valid command");
+			break;
 		}
 	}
 

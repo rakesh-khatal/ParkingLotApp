@@ -11,6 +11,7 @@ public interface ParkingLotDAO {
 	 * @param size
 	 */
 	public void createParkingLot(final int size);
-	public int park(Vehicle vehicle);
+	public int park(final Vehicle vehicle);
 	public Map<Vehicle,ParkingLotSpace> getParkedVechileDetails();
+	public int unPark(int slotId);
 }

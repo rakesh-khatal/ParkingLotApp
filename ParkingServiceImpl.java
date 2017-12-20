@@ -59,4 +59,11 @@ public class ParkingServiceImpl implements ParkingService{
 		return null;
 	}
 
+	@Override
+	public int leaveVehicle(int slotId) {
+		
+		int emptySlotId = ParkingLotDAOImpl.getInstance().unPark(slotId);
+		return emptySlotId;
+	}
+
 }
