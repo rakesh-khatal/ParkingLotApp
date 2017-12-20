@@ -5,6 +5,7 @@ package com.parkingapp.service;
 
 import java.util.List;
 
+import com.parkingapp.common.Color;
 import com.parkingapp.model.Ticket;
 
 /**
@@ -23,7 +24,7 @@ public interface ParkingService {
 	 * @param registrationNumber
 	 * @param color
 	 */
-	public int parkVehicle(final String registrationNumber, final String color);
+	public int parkVehicle(final String registrationNumber, Color color);
 	
 	/**
 	 * This method is use to get the all park vehicles available in parking lot
@@ -36,4 +37,6 @@ public interface ParkingService {
 	 * @param slotId
 	 */
 	public int leaveVehicle(final int slotId);
+	
+	public String getRegistrationNumbersOfVehicleByColor(Color color);
 }

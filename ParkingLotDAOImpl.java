@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import com.parkingapp.common.Color;
 import com.parkingapp.common.VehilcleSize;
 import com.parkingapp.model.ParkingLot;
 import com.parkingapp.model.ParkingLotSpace;
@@ -119,5 +120,35 @@ public class ParkingLotDAOImpl implements ParkingLotDAO {
 
 		return occupiedParkingSpaces;
 	}
+	
+	@Override
+	 public String getRegistrationNumbersOfVehicleByColor(Color color){
+		 if (color != null) {
 
+				StringBuilder builder = new StringBuilder();
+				boolean flag = false;
+				Iterator itr = occupiedParkingSpaces.entrySet().iterator();
+				while (itr.hasNext()) {
+
+					Map.Entry pair = (Map.Entry)itr.next();
+					
+					Vehicle vehicle = (Vehicle) pair.getKey();
+			        
+					if (color.equals(vehicle.getColor())) {
+						if (flag) {
+							builder.append(",");
+						}
+						builder.append(vehicle.getRegistrationNo());
+						flag = true;
+					}
+				}
+				if (!builder.toString().isEmpty()) {
+					return builder.toString();
+				} else {
+					return "Not found";
+				}
+
+			}
+		 return null;
+	 }
 }

@@ -11,49 +11,49 @@ import com.parkingapp.model.ParkingLotSpace;
 import com.parkingapp.model.Ticket;
 import com.parkingapp.model.Vehicle;
 
-public class ParkingServiceImpl implements ParkingService{
+public class ParkingServiceImpl implements ParkingService {
 
 	@Override
 	public void createParkingLot(final int size) {
-		
+
 		ParkingLotDAOImpl.getInstance().createParkingLot(size);
 		System.out.println("Created a parking lot with " + size + " slots");
 	}
-	
+
 	@Override
-	public int parkVehicle(String registrationNumber, String color) {
+	public int parkVehicle(String registrationNumber, Color color) {
 		
 		Vehicle vehicle = new Vehicle();
-		vehicle.setColor(Color.BLACK);
+		vehicle.setColor(color);
 		vehicle.setRegistrationNo(registrationNumber);
-		
+
 		int slotId = ParkingLotDAOImpl.getInstance().park(vehicle);
-		
+
 		return slotId;
-					
+
 	}
 
 	@Override
 	public List<Ticket> getParkedVehicleDetails() {
 
-		Map<Vehicle,ParkingLotSpace> occupiedParkingSpaces = ParkingLotDAOImpl.getInstance().getParkedVechileDetails();
-		if(occupiedParkingSpaces != null){
+		Map<Vehicle, ParkingLotSpace> occupiedParkingSpaces = ParkingLotDAOImpl.getInstance().getParkedVechileDetails();
+		if (occupiedParkingSpaces != null) {
 			Iterator iterator = occupiedParkingSpaces.entrySet().iterator();
 			List<Ticket> ticketList = new ArrayList<>();
-		    while (iterator.hasNext()) {
-		    	
-		        Map.Entry pair = (Map.Entry)iterator.next();
-		        
-		        ParkingLotSpace parkingLotSpace = (ParkingLotSpace) pair.getValue();
-		        Vehicle vehicle = (Vehicle) pair.getKey();
-		        Ticket ticket = new Ticket();
-		        ticket.setParkingSlotId(parkingLotSpace.getSlotId());
-		        ticket.setColor(vehicle.getColor());
-		        ticket.setRegistrationNo(vehicle.getRegistrationNo());
-		        
-		        ticketList.add(ticket);
-		       
-		    }
+			while (iterator.hasNext()) {
+
+				Map.Entry pair = (Map.Entry) iterator.next();
+
+				ParkingLotSpace parkingLotSpace = (ParkingLotSpace) pair.getValue();
+				Vehicle vehicle = (Vehicle) pair.getKey();
+				Ticket ticket = new Ticket();
+				ticket.setParkingSlotId(parkingLotSpace.getSlotId());
+				ticket.setColor(vehicle.getColor());
+				ticket.setRegistrationNo(vehicle.getRegistrationNo());
+
+				ticketList.add(ticket);
+
+			}
 			return ticketList;
 		}
 		return null;
@@ -61,9 +61,17 @@ public class ParkingServiceImpl implements ParkingService{
 
 	@Override
 	public int leaveVehicle(int slotId) {
-		
+
 		int emptySlotId = ParkingLotDAOImpl.getInstance().unPark(slotId);
 		return emptySlotId;
 	}
 
+	@Override
+	public String getRegistrationNumbersOfVehicleByColor(Color color) {
+		
+		return ParkingLotDAOImpl.getInstance()
+				.getRegistrationNumbersOfVehicleByColor(color);
+	}
+	
+	
 }

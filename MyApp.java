@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
+import com.parkingapp.common.Color;
 import com.parkingapp.model.Ticket;
 
 public class MyApp {
@@ -37,13 +38,19 @@ public class MyApp {
 
 				String registrationNumber = array[1];
 				String color = array[2];
+				try {
 
-				int slotId = parkingService.parkVehicle(registrationNumber, color);
-				if(slotId != 0)
-					System.out.println("Allocated slot number: " + slotId);
-				else
-					System.out.println("Sorry, parking lot is full");
-
+					int slotId = parkingService.parkVehicle(registrationNumber, Color.valueOf(color));
+					
+					if(slotId != 0)
+						System.out.println("Allocated slot number: " + slotId);
+					else
+						System.out.println("Sorry, parking lot is full");
+					
+				} catch (Exception e) {
+					System.out.println("Please enter valid color");
+				}
+				
 				break;
 				
 			case "status":
@@ -72,6 +79,25 @@ public class MyApp {
 				else
 					System.out.println("Please enter valid input");
 
+				break;
+			
+			case "registration_numbers_for_cars_with_colour":
+					try {
+						String registrationNumbers = parkingService.getRegistrationNumbersOfVehicleByColor(Color.valueOf(array[1]));
+						System.out.println(registrationNumbers);
+					} catch (Exception e) {
+						System.out.println("Please enter valid color");
+					}
+					
+				
+				break;
+
+			case "slot_numbers_for_cars_with_colour":
+				
+				break;
+
+			case "slot_number_for_registration_number":
+				
 				break;
 				
 			default:
