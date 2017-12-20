@@ -72,6 +72,18 @@ public class ParkingServiceImpl implements ParkingService {
 		return ParkingLotDAOImpl.getInstance()
 				.getRegistrationNumbersOfVehicleByColor(color);
 	}
+
+	@Override
+	public String getSlotNumbersOfVehicleByColour(Color color) {
+		
+		return ParkingLotDAOImpl.getInstance().getSlotNumbersOfVehicleByColour(color);
+	}
+
+	@Override
+	public String getSlotNumberByregistrationNumbers(String registrationNumber) {
+		
+		return ParkingLotDAOImpl.getInstance().getSlotNumberByregistrationNumbers(registrationNumber);
+	}
 	
 	
 }

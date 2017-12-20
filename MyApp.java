@@ -25,7 +25,7 @@ public class MyApp {
 	public static void decideOperation(final String[] array) {
 
 		final ParkingService parkingService = new ParkingServiceImpl();
-		
+
 		try {
 			switch (array[0]) {
 			case "create_parking_lot":
@@ -33,80 +33,82 @@ public class MyApp {
 				parkingService.createParkingLot(Integer.parseInt(array[1]));
 
 				break;
-				
+
 			case "park":
 
 				String registrationNumber = array[1];
 				String color = array[2];
 				try {
 
-					int slotId = parkingService.parkVehicle(registrationNumber, Color.valueOf(color));
-					
-					if(slotId != 0)
+					int slotId = parkingService.parkVehicle(registrationNumber, Color.valueOf(color.toUpperCase()));
+
+					if (slotId != 0)
 						System.out.println("Allocated slot number: " + slotId);
 					else
 						System.out.println("Sorry, parking lot is full");
-					
+
 				} catch (Exception e) {
 					System.out.println("Please enter valid color");
 				}
-				
+
 				break;
-				
+
 			case "status":
 
 				List<Ticket> tickets = parkingService.getParkedVehicleDetails();
-				
-				 if(tickets != null){
-					 Iterator<Ticket> ticketIterator = tickets.iterator();
-					 System.out.println("Slot No	" + "Registration No.	" + "Colour");
-				        while (ticketIterator.hasNext()) {
-				         Ticket ticket = ticketIterator.next();
-				         System.out.println(ticket.getParkingSlotId() + "	" + ticket.getRegistrationNo() + "	" + ticket.getColor());
-				            
-				        }
-				 }else{
-					 System.out.println("No parking Lot is available.");
-				 }
+
+				if (tickets != null) {
+					Iterator<Ticket> ticketIterator = tickets.iterator();
+					System.out.println("Slot No	" + "Registration No.	" + "Colour");
+					while (ticketIterator.hasNext()) {
+						Ticket ticket = ticketIterator.next();
+						System.out.println(ticket.getParkingSlotId() + "	" + ticket.getRegistrationNo() + "	"
+								+ ticket.getColor());
+
+					}
+				} else {
+					System.out.println("No parking Lot is available.");
+				}
 
 				break;
-				
+
 			case "leave":
-				
+
 				int leavedSlotId = parkingService.leaveVehicle(Integer.parseInt(array[1]));
-				if(leavedSlotId != 0)
+				if (leavedSlotId != 0)
 					System.out.println("Slot number " + leavedSlotId + " is free");
 				else
 					System.out.println("Please enter valid input");
 
 				break;
-			
+
 			case "registration_numbers_for_cars_with_colour":
-					try {
-						String registrationNumbers = parkingService.getRegistrationNumbersOfVehicleByColor(Color.valueOf(array[1]));
-						System.out.println(registrationNumbers);
-					} catch (Exception e) {
-						System.out.println("Please enter valid color");
-					}
-					
-				
+
+				String registrationNumbers = parkingService
+						.getRegistrationNumbersOfVehicleByColor(Color.valueOf(array[1].toUpperCase()));
+				System.out.println(registrationNumbers);
 				break;
 
 			case "slot_numbers_for_cars_with_colour":
-				
+				String slotNumbersByColor = parkingService.getSlotNumbersOfVehicleByColour(Color.valueOf(array[1].toUpperCase()));
+				System.out.println(slotNumbersByColor);
 				break;
 
 			case "slot_number_for_registration_number":
 				
+				String slotNumbersByregistrationNumber = parkingService.getSlotNumberByregistrationNumbers(array[1]);
+				System.out.println(slotNumbersByregistrationNumber);
 				break;
-				
+
 			default:
 				System.out.println("Please enter valid command");
 				break;
 			}
-			
+
 		} catch (ArrayIndexOutOfBoundsException exception) {
 			System.out.println("Please enter valid input");
+		} catch (IllegalArgumentException exception) {
+			System.out.println("Please enter valid color");
 		}
 	}
 

@@ -14,6 +14,8 @@ public interface ParkingLotDAO {
 	public void createParkingLot(final int size);
 	public int park(final Vehicle vehicle);
 	public Map<Vehicle,ParkingLotSpace> getParkedVechileDetails();
-	public int unPark(int slotId);
-	String getRegistrationNumbersOfVehicleByColor(Color color);
+	public int unPark(final int slotId);
+	public String getRegistrationNumbersOfVehicleByColor(Color color);
+	public String getSlotNumbersOfVehicleByColour(Color color);
+	public String getSlotNumberByregistrationNumbers(final String registrationNumber);
 }

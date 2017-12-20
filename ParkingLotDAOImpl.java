@@ -133,7 +133,7 @@ public class ParkingLotDAOImpl implements ParkingLotDAO {
 					Map.Entry pair = (Map.Entry)itr.next();
 					
 					Vehicle vehicle = (Vehicle) pair.getKey();
-			        
+					
 					if (color.equals(vehicle.getColor())) {
 						if (flag) {
 							builder.append(",");
@@ -151,4 +151,68 @@ public class ParkingLotDAOImpl implements ParkingLotDAO {
 			}
 		 return null;
 	 }
+
+	@Override
+	public String getSlotNumbersOfVehicleByColour(Color color) {
+		 if (color != null) {
+
+				StringBuilder builder = new StringBuilder();
+				boolean flag = false;
+				Iterator itr = occupiedParkingSpaces.entrySet().iterator();
+				while (itr.hasNext()) {
+
+					Map.Entry pair = (Map.Entry)itr.next();
+					
+					Vehicle vehicle = (Vehicle) pair.getKey();
+					ParkingLotSpace parkingLotSpace = (ParkingLotSpace) pair.getValue();
+					if (color.equals(vehicle.getColor())) {
+						if (flag) {
+							builder.append(",");
+						}
+						builder.append(parkingLotSpace.getSlotId());
+						flag = true;
+					}
+				}
+				if (!builder.toString().isEmpty()) {
+					return builder.toString();
+				} else {
+					return "Not found";
+				}
+
+			}
+		 
+		return null;
+	}
+
+	@Override
+	public String getSlotNumberByregistrationNumbers(String registrationNumber) {
+		 if (registrationNumber != null) {
+
+				StringBuilder builder = new StringBuilder();
+				boolean flag = false;
+				Iterator itr = occupiedParkingSpaces.entrySet().iterator();
+				while (itr.hasNext()) {
+
+					Map.Entry pair = (Map.Entry)itr.next();
+					
+					Vehicle vehicle = (Vehicle) pair.getKey();
+					ParkingLotSpace parkingLotSpace = (ParkingLotSpace) pair.getValue();
+					
+					if (registrationNumber.equals(vehicle.getRegistrationNo())) {
+						if (flag) {
+							builder.append(",");
+						}
+						builder.append(parkingLotSpace.getSlotId());
+						flag = true;
+					}
+				}
+				if (!builder.toString().isEmpty()) {
+					return builder.toString();
+				} else {
+					return "Not found";
+				}
+
+			}
+		return null;
+	}
 }

@@ -39,4 +39,6 @@ public interface ParkingService {
 	public int leaveVehicle(final int slotId);
 	
 	public String getRegistrationNumbersOfVehicleByColor(Color color);
+	public String getSlotNumbersOfVehicleByColour(Color color);
+	public String getSlotNumberByregistrationNumbers(final String registrationNumber);
 }
