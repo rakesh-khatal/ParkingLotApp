@@ -53,9 +53,10 @@ public class ParkingLotDAOImpl implements ParkingLotDAO{
             emptySlot = parkingLotIterator.next();
             if (!emptySlot.isOccupied()) {
                 isSlotFound = true;
+                return emptySlot;
             }
         }
-        return emptySlot;
+        return null;
     }
 	
 	public int park(Vehicle vehicle) {

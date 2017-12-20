@@ -37,23 +37,26 @@ public class ParkingServiceImpl implements ParkingService{
 	public List<Ticket> getParkedVehicleDetails() {
 
 		Map<Vehicle,ParkingLotSpace> occupiedParkingSpaces = ParkingLotDAOImpl.getInstance().getParkedVechileDetails();
-		Iterator iterator = occupiedParkingSpaces.entrySet().iterator();
-		List<Ticket> ticketList = new ArrayList<>();
-	    while (iterator.hasNext()) {
-	    	
-	        Map.Entry pair = (Map.Entry)iterator.next();
-	        
-	        ParkingLotSpace parkingLotSpace = (ParkingLotSpace) pair.getValue();
-	        Vehicle vehicle = (Vehicle) pair.getKey();
-	        Ticket ticket = new Ticket();
-	        ticket.setParkingSlotId(parkingLotSpace.getSlotId());
-	        ticket.setColor(vehicle.getColor());
-	        ticket.setRegistrationNo(vehicle.getRegistrationNo());
-	        
-	        ticketList.add(ticket);
-	       
-	    }
-		return ticketList;
+		if(occupiedParkingSpaces != null){
+			Iterator iterator = occupiedParkingSpaces.entrySet().iterator();
+			List<Ticket> ticketList = new ArrayList<>();
+		    while (iterator.hasNext()) {
+		    	
+		        Map.Entry pair = (Map.Entry)iterator.next();
+		        
+		        ParkingLotSpace parkingLotSpace = (ParkingLotSpace) pair.getValue();
+		        Vehicle vehicle = (Vehicle) pair.getKey();
+		        Ticket ticket = new Ticket();
+		        ticket.setParkingSlotId(parkingLotSpace.getSlotId());
+		        ticket.setColor(vehicle.getColor());
+		        ticket.setRegistrationNo(vehicle.getRegistrationNo());
+		        
+		        ticketList.add(ticket);
+		       
+		    }
+			return ticketList;
+		}
+		return null;
 	}
 
 }

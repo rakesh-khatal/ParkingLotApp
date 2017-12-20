@@ -40,7 +40,7 @@ public class MyApp {
 			if(slotId != 0)
 				System.out.println("Allocated slot number: " + slotId);
 			else
-				System.out.println("No parking Lot is available.");
+				System.out.println("Sorry, parking lot is full");
 
 			break;
 			
@@ -48,7 +48,7 @@ public class MyApp {
 
 			List<Ticket> tickets = parkingService.getParkedVehicleDetails();
 			
-			 if(! tickets.isEmpty()){
+			 if(tickets != null){
 				 Iterator<Ticket> ticketIterator = tickets.iterator();
 				 System.out.println("Slot No	" + "Registration No.	" + "Colour");
 			        while (ticketIterator.hasNext()) {
@@ -57,7 +57,7 @@ public class MyApp {
 			            
 			        }
 			 }else{
-				 System.out.println("No parked vehicle available.");
+				 System.out.println("No parking Lot is available.");
 			 }
 
 			break;
