@@ -10,16 +10,17 @@ import com.parkingapp.model.Ticket;
 public class MyApp {
 
 	private static final String INPUT_SEPERATOR = "\\s+";
-
+	
+	private static boolean quit = false;
 	public static void main(String[] args) {
 
 		Scanner scanner = new Scanner(System.in);
-		while (true) {
+		while (!quit) {
 			String[] array = scanner.nextLine().split(INPUT_SEPERATOR);
 			decideOperation(array);
 		}
-		// TO do
-		// scanner.close();
+		
+		 scanner.close();
 	}
 
 	public static void decideOperation(final String[] array) {
@@ -57,7 +58,7 @@ public class MyApp {
 
 				List<Ticket> tickets = parkingService.getParkedVehicleDetails();
 
-				if (tickets != null) {
+				if (tickets != null && !tickets.isEmpty()) {
 					Iterator<Ticket> ticketIterator = tickets.iterator();
 					System.out.println("Slot No	" + "Registration No.	" + "Colour");
 					while (ticketIterator.hasNext()) {
@@ -99,7 +100,9 @@ public class MyApp {
 				String slotNumbersByregistrationNumber = parkingService.getSlotNumberByregistrationNumbers(array[1]);
 				System.out.println(slotNumbersByregistrationNumber);
 				break;
-
+			case "quit":
+				quit = true;
+				break;
 			default:
 				System.out.println("Please enter valid command");
 				break;
