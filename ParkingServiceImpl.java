@@ -1,6 +1,7 @@
 package com.parkingapp.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -39,7 +40,7 @@ public class ParkingServiceImpl implements ParkingService {
 		Map<Vehicle, ParkingLotSpace> occupiedParkingSpaces = ParkingLotDAOImpl.getInstance().getParkedVechileDetails();
 		if (occupiedParkingSpaces != null) {
 			Iterator iterator = occupiedParkingSpaces.entrySet().iterator();
-			List<Ticket> ticketList = new ArrayList<>();
+			List<Ticket> ticketList = new ArrayList<Ticket>();
 			while (iterator.hasNext()) {
 
 				Map.Entry pair = (Map.Entry) iterator.next();
@@ -54,6 +55,7 @@ public class ParkingServiceImpl implements ParkingService {
 				ticketList.add(ticket);
 
 			}
+			Collections.sort(ticketList);
 			return ticketList;
 		}
 		return null;
