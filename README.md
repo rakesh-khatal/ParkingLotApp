@@ -7,7 +7,9 @@ Installation:
 
 Pre-requisite:
 
-	JDK and Maven must be installed along with JAVA_HOME and MAVEN_HOME environment variable setup.
+	JDK and Maven must be installed along with JAVA_HOME and MAVEN_HOME environment/path variable setup.
+	If it is not installed then I would suggest open below link follow the instructions for maven setup.
+	https://maven.apache.org/install.html
 
 Execution:
 		 
